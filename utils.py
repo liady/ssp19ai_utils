@@ -1,4 +1,9 @@
 import numpy as np
+import matplotlib.pyplot as plt 
+
+def visualize_points(X, y):
+  plt.scatter(X[:, 0], X[:, 1], c=y, s=40, cmap=plt.cm.Spectral)
+  plt.show()
 
 def generateDataPoints(number_of_classes, points_per_class):
   N = points_per_class
