@@ -64,7 +64,7 @@ def plot_confusion_matrix(y_true, y_pred, classes=None,
     cm = confusion_matrix(y_true, y_pred)
     # Only use the labels that appear in the data
     unique = unique_labels(y_true, y_pred)
-    if(classes == None):
+    if(classes is None):
       classes = unique
     else:
       classes = classes[unique]
