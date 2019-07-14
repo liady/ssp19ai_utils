@@ -5,7 +5,7 @@ def visualize_points(X, y):
   plt.scatter(X[:, 0], X[:, 1], c=y, s=40, cmap=plt.cm.Spectral)
   plt.show()
 
-def generateDataPoints(number_of_classes, points_per_class):
+def generate_data_points(number_of_classes, points_per_class):
   N = points_per_class
   K = number_of_classes
   X = np.zeros((N*K,2)) # data matrix (each row = single example)
