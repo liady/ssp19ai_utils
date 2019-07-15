@@ -359,7 +359,8 @@ def plot_single_image_correct(i, predictions, true_labels, images, class_names=N
     color = 'red'
   
   class_name = true_label if class_names is None else class_names[true_label]
-  plt.xlabel("{} {:2.0f}% ({})".format(class_name,
+  class_name_predicted = predicted_label if class_names is None else class_names[predicted_label]
+  plt.xlabel("{} {:2.0f}% ({})".format(class_name_predicted,
                                 100*np.max(predictions_array),
                                 class_name),
                                 color=color)
@@ -390,7 +391,7 @@ def plot_multi_images_prob(predictions, labels, images, class_names=None, start=
   num_cols = 3
   num_images = num_rows*num_cols
   plt.figure(figsize=(2*2*num_cols, 2*num_rows))
-  for i in range(start, num_images):
+  for i in range(num_images):
     index = i + start
     plt.subplot(num_rows, 2*num_cols, 2*i+1)
     plot_single_image_correct(index, predictions, labels, images, class_names, cmap=cmap)
@@ -400,7 +401,7 @@ def plot_multi_images_prob(predictions, labels, images, class_names=None, start=
 
 def plot_multi_images(images, labels, class_names=None, start=0, num_rows=5, num_cols=5, cmap=plt.cm.binary):
   plt.figure(figsize=(2*num_cols, 2*num_rows))
-  for i in range(start, num_cols*num_rows):
+  for i in range(num_cols*num_rows):
     index = i + start
     plt.subplot(num_rows,num_cols,i+1)
     plt.xticks([])
