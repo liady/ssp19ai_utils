@@ -344,27 +344,28 @@ def draw_model(model, view=True, filename="network.gv", title="Neural Network"):
         return graphviz.Source(dot_graph)
 
       
-def plot_single_image(i, predictions_array, true_label, img, class_names):
-  predictions_array, true_label, img = predictions_array[i], true_label[i], img[i]
+def plot_single_image_correct(i, predictions, true_labels, images, class_names=None, cmap=plt.cm.binary):
+  predictions, true_label, img = predictions[i], true_labels[i], images[i]
   plt.grid(False)
   plt.xticks([])
   plt.yticks([])
   
-  plt.imshow(img, cmap=plt.cm.binary)
+  plt.imshow(img, cmap=cmap)
   
-  predicted_label = np.argmax(predictions_array)
+  predicted_label = np.argmax(predictions)
   if predicted_label == true_label:
     color = 'blue'
   else:
     color = 'red'
   
+  class_name = true_label if class_names is None else class_names[true_label]
   plt.xlabel("{} {:2.0f}% ({})".format(class_names[predicted_label],
                                 100*np.max(predictions_array),
-                                class_names[true_label]),
+                                class_name),
                                 color=color)
 
-def plot_value_array(i, predictions_array, true_label):
-  predictions_array, true_label = predictions_array[i], true_label[i]
+def plot_value_array(i, predictions, true_labels):
+  predictions_array, true_label = predictions[i], true_labels[i]
   plt.grid(False)
   plt.xticks([])
   plt.yticks([])
@@ -376,33 +377,44 @@ def plot_value_array(i, predictions_array, true_label):
   thisplot[true_label].set_color('blue')
 
   
-def plot_image_and_prob(predictions, test_labels, test_images, class_names, i = 0):
+def plot_image_and_prob(predictions, test_labels, test_images, class_names=None, i = 0, cmap):
   plt.figure(figsize=(6,3))
   plt.subplot(1,2,1)
-  plot_single_image(i, predictions, test_labels, test_images, class_names)
+  plot_single_image_correct(i, predictions, test_labels, test_images, class_names, cmap=cmap)
   plt.subplot(1,2,2)
   plot_value_array(i, predictions,  test_labels)
   plt.show()
 
-def plot_multi_images_prob(predictions, test_labels, test_images, class_names, start=0, num_rows=5, num_cols=3 ):
+def plot_multi_images_prob(predictions, labels, images, class_names=None, start=0, num_rows=5, num_cols=3, cmap ):
   num_rows = 5
   num_cols = 3
   num_images = num_rows*num_cols
   plt.figure(figsize=(2*2*num_cols, 2*num_rows))
   for i in range(start, num_images):
     plt.subplot(num_rows, 2*num_cols, 2*i+1)
-    plot_single_image(i, predictions, test_labels, test_images, class_names)
+    plot_single_image_correct(i, predictions, labels, images, class_names, cmap=cmap)
     plt.subplot(num_rows, 2*num_cols, 2*i+2)
-    plot_value_array(i, predictions, test_labels)
+    plot_value_array(i, predictions, labels)
   plt.show()
 
-def plot_multi_images(train_images, train_labels, class_names, start=0, num_rows=5, num_cols=5):
+def plot_multi_images(images, labels, class_names=None, start=0, num_rows=5, num_cols=5, cmap=plt.cm.binary):
   plt.figure(figsize=(2*num_cols, 2*num_rows))
   for i in range(start, num_cols*num_rows):
     plt.subplot(num_rows,num_cols,i+1)
     plt.xticks([])
     plt.yticks([])
     plt.grid(False)
-    plt.imshow(train_images[i], cmap=plt.cm.binary)
-    plt.xlabel(class_names[train_labels[i]])
+    plt.imshow(images[i], cmap=cmap)
+    label = labels[i] if class_names is None else class_names[labels[i]]
+    plt.xlabel(label)
   plt.show()
+
+
+def plot_image(images, labels, class_names = None, index=0, colorbar=True, cmap='Greys'):
+  plt.figure()
+  plt.imshow(images[index], cmap=cmap) # print the image
+  if(colorbar == True):
+    plt.colorbar()
+  plt.show()
+  label = labels[index] if class_names is None else class_names[labels[i]]
+  print("the label is:", labels[index]) # The train label
