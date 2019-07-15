@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt 
 
-def get_label_with_highest_probability(probabilities):
+def label_with_highest_prob(probabilities):
   return np.argmax(probabilities, axis = 1)
 
 def visualize_points(X, y):
