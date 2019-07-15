@@ -390,7 +390,7 @@ def plot_multi_images_prob(predictions, labels, images, class_names=None, start=
   num_cols = 3
   num_images = num_rows*num_cols
   plt.figure(figsize=(2*2*num_cols, 2*num_rows))
-  for i in range(start, num_images):
+  for i in range(start, num_images + start):
     plt.subplot(num_rows, 2*num_cols, 2*i+1)
     plot_single_image_correct(i, predictions, labels, images, class_names, cmap=cmap)
     plt.subplot(num_rows, 2*num_cols, 2*i+2)
@@ -399,7 +399,7 @@ def plot_multi_images_prob(predictions, labels, images, class_names=None, start=
 
 def plot_multi_images(images, labels, class_names=None, start=0, num_rows=5, num_cols=5, cmap=plt.cm.binary):
   plt.figure(figsize=(2*num_cols, 2*num_rows))
-  for i in range(start, num_cols*num_rows):
+  for i in range(start, num_cols*num_rows + start):
     plt.subplot(num_rows,num_cols,i+1)
     plt.xticks([])
     plt.yticks([])
