@@ -345,14 +345,14 @@ def draw_model(model, view=True, filename="network.gv", title="Neural Network"):
 
       
 def plot_single_image_correct(i, predictions, true_labels, images, class_names=None, cmap=plt.cm.binary):
-  predictions, true_label, img = predictions[i], true_labels[i], images[i]
+  predictions_array, true_label, img = predictions[i], true_labels[i], images[i]
   plt.grid(False)
   plt.xticks([])
   plt.yticks([])
   
   plt.imshow(img, cmap=cmap)
   
-  predicted_label = np.argmax(predictions)
+  predicted_label = np.argmax(predictions_array)
   if predicted_label == true_label:
     color = 'blue'
   else:
