@@ -344,7 +344,7 @@ def draw_model(model, view=True, filename="network.gv", title="Neural Network"):
         return graphviz.Source(dot_graph)
 
       
-def plot_single_image(i, predictions_array, true_label, img):
+def plot_single_image(i, predictions_array, true_label, img, class_names):
   predictions_array, true_label, img = predictions_array[i], true_label[i], img[i]
   plt.grid(False)
   plt.xticks([])
@@ -374,3 +374,35 @@ def plot_value_array(i, predictions_array, true_label):
   
   thisplot[predicted_label].set_color('red')
   thisplot[true_label].set_color('blue')
+
+  
+def plot_image_and_prob(predictions, test_labels, test_images, class_names, i = 0):
+  plt.figure(figsize=(6,3))
+  plt.subplot(1,2,1)
+  plot_single_image(i, predictions, test_labels, test_images, class_names)
+  plt.subplot(1,2,2)
+  plot_value_array(i, predictions,  test_labels)
+  plt.show()
+
+def plot_multi_images_prob(predictions, test_labels, test_images, class_names, start=0, num_rows=5, num_cols=3 ):
+  num_rows = 5
+  num_cols = 3
+  num_images = num_rows*num_cols
+  plt.figure(figsize=(2*2*num_cols, 2*num_rows))
+  for i in range(start, num_images):
+    plt.subplot(num_rows, 2*num_cols, 2*i+1)
+    plot_single_image(i, predictions, test_labels, test_images, class_names)
+    plt.subplot(num_rows, 2*num_cols, 2*i+2)
+    plot_value_array(i, predictions, test_labels)
+  plt.show()
+
+def plot_multi_images(train_images, train_labels, class_names, start=0, num_rows=5, num_cols=5):
+  plt.figure(figsize=(2*num_cols, 2*num_rows))
+  for i in range(start, num_cols*num_rows):
+    plt.subplot(num_rows,num_cols,i+1)
+    plt.xticks([])
+    plt.yticks([])
+    plt.grid(False)
+    plt.imshow(train_images[i], cmap=plt.cm.binary)
+    plt.xlabel(class_names[train_labels[i]])
+  plt.show()
