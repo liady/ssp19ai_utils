@@ -126,21 +126,6 @@ def plot_accuracy_and_loss(history):
   plt.show()
 
   
-"""
-Copyright (C) 2018 by Tudor Gheorghiu
-Permission is hereby granted, free of charge,
-to any person obtaining a copy of this software and associated
-documentation files (the "Software"),
-to deal in the Software without restriction,
-including without l> imitation the rights to
-use, copy, modify, merge, publish, distribute,
-sublicense, and/or sell copies of the Software,
-and to permit persons to whom the Software is furnished to do so,
-subject to the following conditions:
-The above copyright notice and this permission notice
-shall be included in all copies or substantial portions of the Software.
-"""
-
 def draw_model(model, view=True, filename="network.gv", title="Neural Network"):
     """Vizualizes a Sequential model.
     # Arguments
@@ -223,6 +208,27 @@ def draw_model(model, view=True, filename="network.gv", title="Neural Network"):
                     c.attr(label=the_label)
                     c.attr(rank='same');
                     c.node_attr.update(color="#2ecc71", style="filled", fontcolor="#2ecc71", shape="circle");
+                    
+            elif(type(model.layers[0]) == keras.layers.Flatten):
+                #Conv2D Input visualizing
+                the_label = title+'\n\n\n\nInput Layer';
+                c.attr(color="white", label=the_label);
+                c.node_attr.update(shape="square");
+                pxls = str(model.layers[0].input_shape).split(',');
+                clr = 1
+                if(len(pxls) >3):
+                  clr = int(pxls[3][1:-1]);
+                if (clr == 1):
+                    clrmap = "Grayscale";
+                    the_color = "black:white";
+                elif (clr == 3):
+                    clrmap = "RGB";
+                    the_color = "#e74c3c:#3498db";
+                else:
+                    clrmap = "";
+                c.node_attr.update(fontcolor="white", fillcolor=the_color, style="filled");
+                n += 1;
+                c.node(str(n), label="Image\n"+pxls[1]+" x"+pxls[2]+" pixels\n"+clrmap, fontcolor="white");
 
             elif(type(model.layers[0]) == keras.layers.Conv2D):
                 #Conv2D Input visualizing
