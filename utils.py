@@ -384,7 +384,7 @@ def plot_image_and_prob(predictions, test_labels, test_images, class_names=None,
     plt.show()
     plot_value_array(i, predictions, test_labels)
     rng = range(len(unique_labels(test_labels)))
-    clsnms = rng if class_name is None else class_names 
+    clsnms = rng if class_names is None else class_names 
     plt.xticks(range(rng), clsnms, rotation=45)
     plt.show()
   else:
