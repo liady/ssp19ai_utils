@@ -390,22 +390,24 @@ def plot_multi_images_prob(predictions, labels, images, class_names=None, start=
   num_cols = 3
   num_images = num_rows*num_cols
   plt.figure(figsize=(2*2*num_cols, 2*num_rows))
-  for i in range(start, num_images + start):
+  for i in range(start, num_images):
+    index = i + start
     plt.subplot(num_rows, 2*num_cols, 2*i+1)
-    plot_single_image_correct(i, predictions, labels, images, class_names, cmap=cmap)
+    plot_single_image_correct(index, predictions, labels, images, class_names, cmap=cmap)
     plt.subplot(num_rows, 2*num_cols, 2*i+2)
-    plot_value_array(i, predictions, labels)
+    plot_value_array(index, predictions, labels)
   plt.show()
 
 def plot_multi_images(images, labels, class_names=None, start=0, num_rows=5, num_cols=5, cmap=plt.cm.binary):
   plt.figure(figsize=(2*num_cols, 2*num_rows))
-  for i in range(start, num_cols*num_rows + start):
+  for i in range(start, num_cols*num_rows):
+    index = i + start
     plt.subplot(num_rows,num_cols,i+1)
     plt.xticks([])
     plt.yticks([])
     plt.grid(False)
-    plt.imshow(images[i], cmap=cmap)
-    label = labels[i] if class_names is None else class_names[labels[i]]
+    plt.imshow(images[index], cmap=cmap)
+    label = labels[index] if class_names is None else class_names[labels[index]]
     plt.xlabel(label)
   plt.show()
 
