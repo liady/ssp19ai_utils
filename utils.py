@@ -359,7 +359,7 @@ def plot_single_image_correct(i, predictions, true_labels, images, class_names=N
     color = 'red'
   
   class_name = true_label if class_names is None else class_names[true_label]
-  plt.xlabel("{} {:2.0f}% ({})".format(class_names[predicted_label],
+  plt.xlabel("{} {:2.0f}% ({})".format(class_name,
                                 100*np.max(predictions_array),
                                 class_name),
                                 color=color)
