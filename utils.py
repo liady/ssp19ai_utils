@@ -107,9 +107,10 @@ def plot_confusion_matrix(y_true, y_pred, classes=None,
     return ax
 
 def plot_accuracy_and_loss(history):
+  accuracy_label = 'accuracy' if 'accuracy' in history.history else 'acc'
   # Plot training & validation accuracy values
-  plt.plot(history.history['accuracy'])
-  plt.plot(history.history['val_accuracy'])
+  plt.plot(history.history[accuracy_label])
+  plt.plot(history.history['val_'+accuracy_label])
   plt.title('Model accuracy')
   plt.ylabel('Accuracy')
   plt.xlabel('Epoch')
