@@ -377,7 +377,7 @@ def plot_value_array(i, predictions, true_labels):
   thisplot[true_label].set_color('blue')
 
   
-def plot_image_and_prob(predictions, test_labels, test_images, class_names=None, i = 0, cmap):
+def plot_image_and_prob(predictions, test_labels, test_images, class_names=None, i = 0, cmap=plt.cm.binary):
   plt.figure(figsize=(6,3))
   plt.subplot(1,2,1)
   plot_single_image_correct(i, predictions, test_labels, test_images, class_names, cmap=cmap)
@@ -385,7 +385,7 @@ def plot_image_and_prob(predictions, test_labels, test_images, class_names=None,
   plot_value_array(i, predictions,  test_labels)
   plt.show()
 
-def plot_multi_images_prob(predictions, labels, images, class_names=None, start=0, num_rows=5, num_cols=3, cmap ):
+def plot_multi_images_prob(predictions, labels, images, class_names=None, start=0, num_rows=5, num_cols=3, cmap=plt.cm.binary ):
   num_rows = 5
   num_cols = 3
   num_images = num_rows*num_cols
