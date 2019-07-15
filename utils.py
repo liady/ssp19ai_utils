@@ -378,13 +378,22 @@ def plot_value_array(i, predictions, true_labels):
   thisplot[true_label].set_color('blue')
 
   
-def plot_image_and_prob(predictions, test_labels, test_images, class_names=None, i = 0, cmap=plt.cm.binary):
-  plt.figure(figsize=(6,3))
-  plt.subplot(1,2,1)
-  plot_single_image_correct(i, predictions, test_labels, test_images, class_names, cmap=cmap)
-  plt.subplot(1,2,2)
-  plot_value_array(i, predictions,  test_labels)
-  plt.show()
+def plot_image_and_prob(predictions, test_labels, test_images, class_names=None, i = 0, cmap=plt.cm.binary,big=False):
+  if(big == True):
+    plot_single_image_correct(i, predictions, test_labels, test_images, class_names, cmap=cmap)
+    plt.show()
+    plot_value_array(i, predictions, test_labels)
+    rng = range(len(unique(test_labels)))
+    clsnms = rng if class_name is None else class_names 
+    plt.xticks(range(rng), clsnms, rotation=45)
+    plt.show()
+  else:
+    plt.figure(figsize=(6,3))
+    plt.subplot(1,2,1)
+    plot_single_image_correct(i, predictions, test_labels, test_images, class_names, cmap=cmap)
+    plt.subplot(1,2,2)
+    plot_value_array(i, predictions,  test_labels)
+    plt.show()
 
 def plot_multi_images_prob(predictions, labels, images, class_names=None, start=0, num_rows=5, num_cols=3, cmap=plt.cm.binary ):
   num_rows = 5
