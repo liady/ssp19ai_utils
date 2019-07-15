@@ -420,4 +420,4 @@ def plot_image(images, labels, class_names = None, index=0, colorbar=True, cmap=
     plt.colorbar()
   plt.show()
   label = labels[index] if class_names is None else class_names[labels[i]]
-  print("the label is:", labels[index]) # The train label
+  print("the label is:", label) # The train label
