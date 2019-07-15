@@ -1,6 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt 
 
+def get_label_with_highest_probability(probabilities):
+  return np.argmax(probabilities, axis = 1)
+
 def visualize_points(X, y):
   plt.scatter(X[:, 0], X[:, 1], c=y, s=40, cmap=plt.cm.Spectral)
   plt.show()
